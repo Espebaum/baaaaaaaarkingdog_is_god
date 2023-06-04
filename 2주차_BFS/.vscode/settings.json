@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "ratio": "cpp"
+    },
+    "cph.general.onceMaintainerMessage": false
+}
