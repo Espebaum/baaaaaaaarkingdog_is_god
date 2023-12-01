@@ -15,9 +15,6 @@ using namespace std;
 
 int tc;
 
-//1234
-//1234
-
 void    reverseDiscard(deque<int>& d, string s)
 {
     int r_flag = 0;
