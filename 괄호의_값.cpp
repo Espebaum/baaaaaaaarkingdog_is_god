@@ -13,7 +13,7 @@
 using namespace std;
 
 string  s;
-int sum;
+int sum; // sum = 0, 첫값은 더하는것으로 시작
 stack<char> sc;
 
 int main()
@@ -28,9 +28,13 @@ int main()
             sc.push(s[i]);
         else
         {
-
+            if (sc.empty()) {
+                cout << 0;
+                return 0;
+            }
+            if (s[i] == ')' && sc.top() == )
         }
     }
-
+    cout << sum;
     return 0;
 }
