@@ -65,7 +65,8 @@
         "unordered_map": "cpp",
         "utility": "cpp",
         "vector": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "filesystem": "cpp"
     },
     "editor.formatOnSave": false,
     "prettier.tabWidth": 4
