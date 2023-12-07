@@ -16,7 +16,8 @@ int tc;
 int l;
 int dx[8] = {-2, -1, 1, 2, 2, 1, -1, -2};
 int dy[8] = {1, 2, 2, 1, -1, -2, -2, -1};
-
+int board[303][303];
+int dist[303][303];
 
 void    solve()
 {
@@ -26,6 +27,7 @@ void    solve()
     for (int i = 0; i < l; i++) {
         for (int j = 0; j < l; j++) {
             board[i][j] = 0;
+            dist[i][j] = -1;
         }
     }
 
@@ -33,25 +35,28 @@ void    solve()
     int cx, cy;
     cin >> kx >> ky;
     cin >> cx >> cy;
-    vis[nx][ny] = 1;
-    q.push(make_pair(cx, cy));
+    dist[kx][ky] = 0;
+    queue< pair<int, int> > q;
+    q.push(make_pair(kx, ky));
 
     while (!q.empty())
     {
         pair<int, int> cur = q.front(); q.pop();
+        if (cur.first == cx && cur.second == cy)
+            break ;
         for (int dir = 0; dir < 8; dir++)
         {
             int nx = cur.first + dx[dir];
             int ny = cur.second + dy[dir];
             if (nx < 0 || nx >= l || ny < 0 || ny >= l)
                 continue;
-            if (vis[nx][ny] || )
+            if (dist[nx][ny] >= 0)
+                continue;
+            dist[nx][ny] = dist[cur.first][cur.second] + 1;
+            q.push(make_pair(nx, ny));
         }
     }
-
-
-    for (int dir)
-
+    cout << dist[cx][cy] << '\n';
 }
 
 int main()
