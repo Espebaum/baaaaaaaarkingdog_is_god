@@ -9,6 +9,8 @@
         "vector": "cpp",
         "stack": "cpp",
         "memory": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "list": "cpp",
+        "bitset": "cpp"
     }
 }

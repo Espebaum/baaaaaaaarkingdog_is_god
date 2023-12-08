@@ -16,9 +16,6 @@ int L, R, C;
 int dx[6] = {0, 0, 1, -1, 0, 0};
 int dy[6] = {1, -1, 0, 0, 0, 0};
 int dz[6] = {0, 0, 0, 0, 1, -1};
-char board[33][33][33];
-int dist[33][33][33];
-queue<pair<int, pair<int, int> > > q;
 
 int main()
 {
@@ -32,9 +29,13 @@ int main()
         if (L == 0 && R == 0 && C == 0)
             break;
 
-        for (int i = 0; i < R; i++)
-            for (int j = 0; j < C; j++)
-                fill(dist[i][j], dist[i][j] + L, -1);
+        queue<pair<int, pair<int, int> > > q;
+        char board[33][33][33];
+        int dist[33][33][33];
+        
+        for (int j = 0; j < R; j++)
+            for (int k = 0; k < C; k++)
+                fill(dist[j][k], dist[j][k] + L, 0);
 
         for (int i = 0; i < L; i++)
         {
@@ -69,7 +70,7 @@ int main()
                 if (nx < 0 || nx >= R || ny < 0 || ny >= C || nz < 0 || nz >= L) 
                     continue;
                 if (board[nx][ny][nz] == '#' ||
-                dist[nx][ny][nz] >= 0)
+                dist[nx][ny][nz] > 0)
                     continue;
                 dist[nx][ny][nz] = dist[curX][curY][curZ] + 1;
                 if (board[nx][ny][nz] == 'E')
