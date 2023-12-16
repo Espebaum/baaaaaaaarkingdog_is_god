@@ -12,34 +12,18 @@
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
 using namespace std;
 
-int N, K, num;
-vector<int> v;
-int ans;
-
-
-void    dfs(int num, int sum)
-{
-    if (num > N)
-        return ;
-
-    ans = max(num, ans);
-
-    for (int i = 0; i < K; i++) {
-        dfs(num + v[i] * sum, sum * 10);
-    }
-}
+int n;
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    cin >> N >> K;
-    for (int i = 0; i < K; i++) {
-        cin >> num;
-        v.push_back(num);
+    cin >> n;
+    
+    for (int i = 0; i < n; i++)
+    {
+        
     }
-    sort(v.begin(), v.end());
-    dfs(0, 1);
-    cout << ans << '\n';
+
     return 0;
 }

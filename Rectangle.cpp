@@ -12,20 +12,30 @@
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
 using namespace std;
 
-int N, K, num;
-vector<int> v;
-int ans;
+int sum;
 
-
-void    dfs(int num, int sum)
+void    solve(int n, int m)
 {
-    if (num > N)
+    if (n == 1 || m == 1) {
+        int mx = max(n, m);
+        sum += mx;
         return ;
-
-    ans = max(num, ans);
-
-    for (int i = 0; i < K; i++) {
-        dfs(num + v[i] * sum, sum * 10);
+    }
+    if (n > m)
+    {
+        n -= m;
+        sum++;
+        solve(n, m);
+    }
+    else if (m > n)
+    {
+        m -= n;
+        sum++;
+        solve(n, m);
+    }
+    else {
+        sum++;
+        return ;
     }
 }
 
@@ -33,13 +43,10 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    cin >> N >> K;
-    for (int i = 0; i < K; i++) {
-        cin >> num;
-        v.push_back(num);
-    }
-    sort(v.begin(), v.end());
-    dfs(0, 1);
-    cout << ans << '\n';
+    int N, M;
+    cin >> N >> M;
+
+    solve(N, M);
+    cout << sum;
     return 0;
 }
