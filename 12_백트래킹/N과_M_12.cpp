@@ -31,6 +31,8 @@ void    solve(int k)
     for (int i = 0; i < N; i++) {
         if (tmp != v[i]) {
             arr[k] = v[i];
+            if (k > 0 && arr[k - 1] > arr[k])
+                continue ;
             isused[i] = 1;
             tmp = arr[k];
             solve(k + 1);

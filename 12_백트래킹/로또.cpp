@@ -12,27 +12,26 @@
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
 using namespace std;
 
-int N, M;
+int K;
 int arr[10];
 int isused[10];
-vector<int> v;
+int num[10];
 
-// 1 7 9 9
 void    solve(int k)
 {
-    if (k == M) {
-        for (int i = 0; i < M; i++)
+    if (k == 6) {
+        for (int i = 0; i < 6; i++)
             cout << arr[i] << ' ';
         cout << '\n';
-        return ;
+        return ; 
     }
-    
-    int tmp = 0;
-    for (int i = 0; i < N; i++) {
-        if (tmp != v[i]) {
-            arr[k] = v[i];
+
+    for (int i = 0; i < K; i++) {
+        if (!isused[i]) {
+            arr[k] = num[i];
+            if (k > 0 && arr[k - 1] > arr[k])
+                continue; 
             isused[i] = 1;
-            tmp = arr[k];
             solve(k + 1);
             isused[i] = 0;
         }
@@ -44,15 +43,24 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
 
-    cin >> N >> M;
+    while (1)
+    {
+        cin >> K;
+        if (K == 0)
+            break ;
+        for (int i = 0; i < K; i++) {
+            int t; cin >> t;
+            num[i] = t;
+        }
 
-    for (int i = 0; i < N; i++) {
-        int num; cin >> num;
-        v.push_back(num);
+        solve(0);
+        cout << '\n';
+
+        for (int i = 0; i < 10; i++) {
+            arr[i] = 0;
+            num[i] = 0;
+        }
     }
-
-    sort(v.begin(), v.end());
-    solve(0);
 
     return 0;
 }
