@@ -25,7 +25,7 @@ void    solve(int k)
         cout << '\n';
         return ; 
     }
-
+    
     for (int i = 0; i < K; i++) {
         if (!isused[i]) {
             arr[k] = num[i];
