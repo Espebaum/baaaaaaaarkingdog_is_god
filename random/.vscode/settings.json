@@ -4,6 +4,7 @@
         "ios": "cpp",
         "list": "cpp",
         "algorithm": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "string": "cpp"
     }
 }
