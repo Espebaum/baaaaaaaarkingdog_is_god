@@ -14,7 +14,7 @@
 using namespace std;
 
 int N;
-int dp[1010101][1];
+int dp[1010101][2];
 
 int main()
 {
@@ -29,8 +29,7 @@ int main()
     vector<int> t;
 
     for (int i = 3; i <= N; i++) {
-        dp[i][0] = dp[i - 1][0] + 1; // d[4][0] => 2
-        cout << "why???: " << dp[3][1] << '\n';
+        dp[i][0] = dp[i - 1][0] + 1;
         int rec = dp[i][0]; // 2
         int tmp = i - 1; // 3
         if ((i % 2) == 0) {
@@ -46,14 +45,11 @@ int main()
                 tmp = i / 3;
         }
         dp[i][1] = tmp;
-        cout << "i : " << i << ' ' << dp[3][1] << '\n';
     }
 
     cout << '\n';
     cout << dp[N][0] << '\n';
     cout << N << ' ';
-
-    // cout << "30: " << dp[3][0] << '\n';
 
     int cur = N;
     for (int i = 0; i < dp[N][0]; i++) {
