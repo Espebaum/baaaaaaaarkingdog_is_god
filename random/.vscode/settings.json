@@ -17,6 +17,8 @@
         "iterator": "cpp",
         "map": "cpp",
         "string_view": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "queue": "cpp",
+        "istream": "cpp"
     }
 }
