@@ -19,6 +19,7 @@
         "string_view": "cpp",
         "unordered_map": "cpp",
         "queue": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "cmath": "cpp"
     }
 }
