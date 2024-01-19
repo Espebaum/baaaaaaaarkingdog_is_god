@@ -14,40 +14,26 @@
 typedef long long ll;
 using namespace std;
 
-int N, M;
+int N;
+int arr[1000101];
 vector<int> v;
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-
     cin >> N;
+
     for (int i = 0; i < N; i++) {
         int num; cin >> num;
+        arr[i] = num;
         v.push_back(num);
     }
     sort(v.begin(), v.end());
-    
-    cin >> M;
-    for (int i = 0; i < M; i++) {
-        int target; cin >> target;
-        int st = 0;
-        int en = N - 1;
-        int c = 0;
-        while (st <= en)
-        {
-            int mid = (st + en) / 2;
-            if (target < v[mid]) {
-                en = mid - 1;
-            } else if (target > v[mid]) {
-                st = mid + 1;
-            } else {
-                c = 1;
-                break ;
-            }
-        }
-        cout << c << '\n';
+    v.erase(unique(v.begin(), v.end()), v.end());
+    // -10 -9 2 4
+    for (int i = 0; i < N; i++) {
+        cout << lower_bound(v.begin(), v.end(), arr[i]) - v.begin() << ' ';
     }
 
     return 0;

@@ -20,6 +20,8 @@
         "unordered_map": "cpp",
         "queue": "cpp",
         "istream": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "iosfwd": "cpp",
+        "stack": "cpp"
     }
 }
