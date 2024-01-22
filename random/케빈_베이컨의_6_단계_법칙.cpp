@@ -19,25 +19,36 @@ int board[101][101];
 int vis[101];
 int ans[101][101];
 
-int dfs(int k, int dest, int ans)
+bool    compare(pair<int, int> a, pair<int, int> b)
 {
-    if (vis[k] == 1) {
-        return ans;
-    }
-    if (k == dest) {
-        return ans;
-    }
-    for (int i = 1; i <= N; i++) {
-        if (!vis[k] && board[k][i] == 1) {
-            if (i == dest) {
-                continue;
+    if (a.second == b.second)
+        return a.first < b.first;
+    else
+        return a.second < b.second;
+}
+
+void    bfs(int k)
+{
+    int now = k;
+    int check = 0;
+    queue<int> q;
+    q.push(k);
+    
+    vis[k] = 1;
+    while (!q.empty()) {
+        int cur = q.front(); q.pop();
+        for (int i = 1; i <= N; i++) {
+            if (i == 1)
+                check++;
+            if (!vis[i] && board[cur][i]) {
+                ans[now][i] = ans[now][cur] + 1;
+                vis[i] = 1;
+                q.push(i);
             }
-            vis[k] = 1;
-            return dfs(i, dest, ans++);
         }
     }
 }
- 
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -52,14 +63,21 @@ int main()
     }
 
     for (int i = 1; i <= N; i++) {
-        for (int j = 1; j <= N; j++) {
-            if (i == j)
-                continue ;
-            ans[i][j] = dfs(i, j, 0);
-        }
+        bfs(i);
         for (int i = 1; i <= N; i++)
             vis[i] = 0;
     }
-    cout<< ans[1][2];
+
+    vector< pair<int, int> > res;
+    for (int i = 1; i <= N; i++) {
+        int sum = 0;
+        for (int j = 1; j <= N; j++) {
+            sum += ans[i][j];
+        }
+        res.push_back(make_pair(i, sum));
+    }
+    sort(res.begin(), res.end(), compare);
+    cout << res[0].first << '\n';
+
     return 0;
 }
