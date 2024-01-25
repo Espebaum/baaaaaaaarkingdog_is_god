@@ -16,29 +16,35 @@ typedef long long ll;
 using namespace std;
 
 int N;
-int arr[100100];
-int rope[100100];
-
-bool compare(int a, int b)
-{
-    return a > b;
-}
+vector<int> a;
+vector<int> b;
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-
     cin >> N;
-    for (int i = 0; i < N; i++) {
-        cin >> arr[i];
-    }
-    sort(arr, arr+N, compare);
 
     for (int i = 0; i < N; i++) {
-        rope[i] = arr[i] * (i + 1);
+        int num; cin >> num;
+        a.push_back(num);
     }
-  
-    cout << *max_element(rope, rope + N);
+    
+    for (int i = 0; i < N; i++) {
+        int num; cin >> num;
+        b.push_back(num);
+    }
+    sort(a.begin(), a.end());
+
+    vector<int> tb(b);
+    sort(tb.begin(), tb.end(), greater<int>());
+
+    int sum = 0;
+    for (int i = 0; i < N; i++) {
+        // cout << "a: " << a[i] << " tb: " << tb[i] << '\n';
+        sum += a[i]*tb[i];
+    }
+    cout << sum;
+
     return 0;
 }

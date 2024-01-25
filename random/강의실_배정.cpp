@@ -16,29 +16,34 @@ typedef long long ll;
 using namespace std;
 
 int N;
-int arr[100100];
-int rope[100100];
+vector<pair<int, int>> vp;
+priority_queue<int, vector<int>, greater<int>> pq;
 
-bool compare(int a, int b)
+bool compare(pair<int,int> a, pair<int,int> b)
 {
-    return a > b;
+    return a.first < b.first;
+}
+
+int solve(int k)
+{
+    pq.push(vp[0].second);
+    for (int i = 1; i < vp.size(); i++) {
+        pq.push(vp[i].second);
+        if (pq.top() <= vp[i].first)
+            pq.pop();
+    }
+    return pq.size();
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-
     cin >> N;
     for (int i = 0; i < N; i++) {
-        cin >> arr[i];
+        int x, y; cin >> x >> y;
+        vp.push_back({x, y});
     }
-    sort(arr, arr+N, compare);
-
-    for (int i = 0; i < N; i++) {
-        rope[i] = arr[i] * (i + 1);
-    }
-  
-    cout << *max_element(rope, rope + N);
-    return 0;
+    sort(vp.begin(), vp.end(), compare);
+    cout << solve(N) << '\n';
 }

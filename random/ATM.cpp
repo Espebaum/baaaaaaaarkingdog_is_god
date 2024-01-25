@@ -16,13 +16,8 @@ typedef long long ll;
 using namespace std;
 
 int N;
-int arr[100100];
-int rope[100100];
-
-bool compare(int a, int b)
-{
-    return a > b;
-}
+int arr[1010];
+int dp[1010];
 
 int main()
 {
@@ -30,15 +25,21 @@ int main()
     cin.tie(NULL); cout.tie(NULL);
 
     cin >> N;
-    for (int i = 0; i < N; i++) {
+    for (int i = 1; i <= N; i++) {
         cin >> arr[i];
     }
-    sort(arr, arr+N, compare);
-
-    for (int i = 0; i < N; i++) {
-        rope[i] = arr[i] * (i + 1);
+    sort(arr+1, arr+N+1);
+    int sum = 0;
+    
+    dp[1] = arr[1];
+    for (int i = 2; i <= N; i++) {
+        dp[i] = dp[i - 1] + arr[i];
     }
-  
-    cout << *max_element(rope, rope + N);
+
+    for (int i = 1; i <= N; i++)
+    {
+        sum += dp[i];
+    }
+    cout << sum;
     return 0;
 }
