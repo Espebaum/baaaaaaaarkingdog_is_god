@@ -66,6 +66,7 @@
         "tuple": "cpp",
         "type_traits": "cpp",
         "typeinfo": "cpp",
-        "__memory": "cpp"
+        "__memory": "cpp",
+        "set": "cpp"
     }
 }
