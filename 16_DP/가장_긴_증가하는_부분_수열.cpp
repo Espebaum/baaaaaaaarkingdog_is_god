@@ -41,10 +41,10 @@ int main()
             dp[i] = 1;
     }
 
-    // for (int i = 1; i <= N; i++) {
-    //     cout << dp[i] << ' ';
-    // }
-    // cout << '\n';
+    for (int i = 1; i <= N; i++) {
+        cout << dp[i] << ' ';
+    }
+    cout << '\n';
     cout << *max_element(dp + 1, dp + N + 1);
 
     return 0;
