@@ -19,7 +19,6 @@ using namespace std;
 int N, M;
 int board[303][303];
 int vis[303][303];
-vector<tuple<int,int,int>>vt;
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
@@ -34,8 +33,9 @@ int main()
         }
     }
     int turn = 0;
-    // while (1)
+    while (1)
     {
+        vector<tuple<int,int,int>>vt;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (board[i][j]) {
@@ -52,14 +52,49 @@ int main()
                 }
             }
         }
-        cout << '\n';
+        if (vt.empty()) {
+            cout << 0; return 0;
+        }
+        for (int i = 0; i < vt.size(); i++) {
+            int cx = get<0>(vt[i]);
+            int cy = get<1>(vt[i]);
+            int point = get<2>(vt[i]);
+            board[cx][cy] -= point;
+            if (board[cx][cy] < 0)
+                board[cx][cy] = 0;
+        }
+        turn++;
+
+        int piece = 0;
+        queue<pair<int,int>>q;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                cout << board[i][j] << ' ';
-            } cout << '\n';
+                if (board[i][j] && !vis[i][j]) {
+                    piece += 1;
+                    if (piece >= 2) {
+                        cout << turn; return 0;
+                    }
+                    q.push({i, j});
+                    vis[i][j] = 1;
+                    while (!q.empty()) {
+                        pair<int,int>cur = q.front(); q.pop();
+                        int cx = cur.first; int cy = cur.second;
+                        for (int dir = 0; dir < 4; dir++) {
+                            int nx = cx + dir[dx];
+                            int ny = cy + dir[dy];
+                            if (nx < 0 || nx >= N || ny < 0 || ny >= M)
+                                continue ;
+                            if (!board[nx][ny] || vis[nx][ny])
+                                continue ;
+                            vis[nx][ny] = 1;
+                            q.push({nx, ny});
+                        }
+                    }
+                }
+            }
         }
-
-        turn++;
+        for (int i = 0; i < N; i++)
+            fill(vis[i], vis[i]+M, 0);
     }
     cout << turn;
     return 0;

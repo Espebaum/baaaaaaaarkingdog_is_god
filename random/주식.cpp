@@ -20,19 +20,23 @@ int arr[1000010];
 
 long long   solve()
 {
-    int stock = 0;
+    long long stock = 0;
     long long sum = 0;
-    for (int i = 1; i <= N; i++) {
-        int check = arr[i];
-        int j;
-        for (j = i + 1; j <= N; j++) {
-            if (arr[j] >= check) {
-                check = arr[j];
-                sum -= check;
-            }
+    long long check = 0;
+    for (int i = N; i >= 2; i--) {
+        check = arr[i];
+        for (int j = i - 1; j >= 1; j--) {
+            if (arr[j] < check) {
+                stock += 1;
+                sum -= arr[j];
+            } else
+                break ;
         }
+        sum += stock * check;
+        i -= stock;
+        stock = 0;
     }
-    return sum;  
+    return sum;
 }
 
 int main()
@@ -47,7 +51,7 @@ int main()
         for (int i = 1; i <= N; i++) {
             cin >> arr[i];
         }
-        cout << solve() << '\n';
+        cout << solve() << "\n";
     }
     return 0;
 }
